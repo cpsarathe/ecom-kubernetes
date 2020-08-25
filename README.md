@@ -56,3 +56,13 @@ Collection of Spring Boot Applications for Basic Ecommerce Operation. Dockerizat
 
 
 ```
+
+###### 4.Make Payment
+
+*http://localhost:11080/payment/pay*
+
+*Basic Auth : payment:payment*
+```
+{"orderId":14,"customerId":13,"total":80.00,"paymentType":"CreditCard"}
+
+```
