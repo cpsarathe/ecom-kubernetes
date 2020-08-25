@@ -2,6 +2,9 @@
 Collection of Spring Boot Applications for Basic Ecommerce Operation. Dockerization and ultimate objective to run it in Kuberntetes
 
 # How to Access ecommerce microservice apps
+
+###### Create a Product
+
 *http://localhost:8080/catalog/product*
 
 *Basic Auth : catalog:catalog*
