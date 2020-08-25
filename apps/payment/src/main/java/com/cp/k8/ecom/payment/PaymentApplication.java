@@ -1,4 +1,4 @@
-package com.cp.k8.payment.payment;
+package com.cp.k8.ecom.payment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

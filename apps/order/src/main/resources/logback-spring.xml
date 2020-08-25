@@ -25,7 +25,7 @@
     <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } %X{logRefId} --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
     <include resource="logback-shari-common.xml"/>
-    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}dsutil.log}"/>
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}order.log}"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
     <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
 
@@ -34,7 +34,7 @@
         <appender-ref ref="FILE" />
     </root>
 
-    <logger name="com.ds.app" level="ALL"/>
+    <logger name="com.cp.k8.ecom.order" level="ALL"/>
 </configuration>
 
 
