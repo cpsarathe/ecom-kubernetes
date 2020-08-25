@@ -1,7 +1,7 @@
 CREATE SCHEMA `cp-kub-customer` DEFAULT CHARACTER SET utf8 ;
 
 CREATE TABLE `cp-kub-customer`.`address` (
-  `id` int(11) NOT NULL COMMENT '',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `type` VARCHAR(32) NULL COMMENT '',
   `address` VARCHAR(255) NULL COMMENT '',
   `created_date` DATETIME NULL COMMENT '',
@@ -10,7 +10,7 @@ CREATE TABLE `cp-kub-customer`.`address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `cp-kub-customer`.`customer` (
-  `id` int(11) NOT NULL COMMENT '',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(255) NULL COMMENT '',
   `email` VARCHAR(255) NULL COMMENT '',
   `mobile` VARCHAR(21) NULL COMMENT '',

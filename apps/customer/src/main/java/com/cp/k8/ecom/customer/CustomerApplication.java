@@ -1,4 +1,4 @@
-package com.cp.k8.customer.customer;
+package com.cp.k8.ecom.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
