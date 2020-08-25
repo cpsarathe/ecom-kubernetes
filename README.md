@@ -3,7 +3,7 @@ Collection of Spring Boot Applications for Basic Ecommerce Operation. Dockerizat
 
 # How to Access ecommerce microservice apps
 
-###### Create a Product
+###### 1.Add a Product
 
 *http://localhost:8080/catalog/product*
 
@@ -17,4 +17,23 @@ Collection of Spring Boot Applications for Basic Ecommerce Operation. Dockerizat
   "quantity": 100,
   "sellerId": "8c3fdfe8-e6c5-11ea-adc1-0242ac120002"
 }
+```
+
+###### 2.Register a Customer
+
+*http://localhost:9080/customer/register*
+
+*Basic Auth : customer:customer*
+```
+{
+  "name": "CP SARATHE",
+  "email":"cp.a1@cp.com",
+  "mobile": "+97155090909",
+  "dateOfBirth": "1992-09-25",
+  "address": {
+  	"type" : "home",
+  	"address":"Al khail street , quasis park building , flat no 12 , dubai, UAE"
+  } 
+}
+
 ```
