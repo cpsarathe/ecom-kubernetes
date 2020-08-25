@@ -37,3 +37,22 @@ Collection of Spring Boot Applications for Basic Ecommerce Operation. Dockerizat
 }
 
 ```
+
+
+
+###### 3.Place Order
+
+*http://localhost:10080/order/place-order*
+
+*Basic Auth : order:order*
+```
+{
+  "customerId": "13",
+  "itemId":"eryhsfjff4a822f-0006-4b8a-b87f-3f9f63b45d3b",
+  "itemPrice": 40.00,
+  "itemQuantity": 2,
+  "paymentType": "CreditCard"
+}
+
+
+```
