@@ -26,8 +26,8 @@ public class CustomerController {
     private AddressRepository addressRepository;
 
     @GetMapping("/amiconnected")
-    public CustomerDTO offerForMe() {
-        return CustomerDTO.builder().message("amiconnected : yes").build();
+    public String amIconnected() {
+        return "amiconnected : yes";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
