@@ -1,0 +1,118 @@
+#We need to setup a single node kubernetes cluster. There are some minimum tools needed to perform these steps.
+#kubectl
+#minikube
+
+
+############ Ubuntu ################################################################################
+
+sudo mkdir -p /app/kubernetes/
+
+sudo /app/kubernetes/
+
+
+#######  kubectl ##########################################################################
+
+Download the latest release with the command:
+
+sudo curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+
+
+#Make the kubectl binary executable.
+
+sudo  chmod +x ./kubectl
+
+#Move the binary in to your PATH.
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+Test to ensure the version you installed is up-to-date:
+sudo kubectl version --client
+
+#######  minikube ##########################################################################
+
+sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+
+sudo chmod +x minikube
+
+sudo mkdir -p /usr/local/bin/
+
+sudo install minikube /usr/local/bin/
+
+
+## VirtualBox - Not working for me on RHEL and Ubuntu so skip it if you want #####################
+To check if virtualization is supported on Linux, run the following command and verify that the output is non-empty:
+
+grep -E --color 'vmx|svm' /proc/cpuinfo
+
+we dont have virtualization enabled so we need to install it
+
+yum install wget
+
+wget https://download.virtualbox.org/virtualbox/6.1.12/VirtualBox-6.1-6.1.12_139181_el7-1.x86_64.rpm
+
+yum install VirtualBox-6.1-6.1.12_139181_el7-1.x86_64.rpm
+
+minikube start --driver=VirtualBox
+
+#### docker #######################################
+
+# Install docker
+sudo apt-get update
+
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+sudo apt-get update
+
+apt-get install docker-ce
+
+sudo systemctl restart docker
+
+#test docker
+sudo docker run hello-world
+
+#We may still face issue while running minikube so run below command
+sudo apt-get install -y conntrack
+
+#### minikube #######################################
+
+#start minikube
+sudo minikube start --driver=none
+
+#check minikube
+sudo minikube status
+
+Expected output -
+
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+#check kubectl is working
+
+sudo kubectl get nodes
+
+#Let’s create a Kubernetes Deployment using an existing image named echoserver, which is a simple HTTP server and expose it on port 8080
+#using --port.
+
+sudo kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
+
+#To access the hello-minikube Deployment, expose it as a Service:
+sudo kubectl expose deployment hello-minikube --type=NodePort --port=8080
+
+#Check if the Pod is up and running:
+sudo kubectl get pod
+
+#Get the URL of the exposed Service to view the Service details:
+sudo minikube service hello-minikube --url
+
+#curl given url
+curl http://10.128.0.5:32085
+
+
+

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-catalog-db-service
+  labels:
+    name: catalog-db-service
+    app: catalog-app
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+     name: mysql-catalog-db-pod
+     app: catalog-app
+
+

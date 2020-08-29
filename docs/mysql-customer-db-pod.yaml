@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-customer-db-pod
+  labels:
+    name: mysql-customer-db-pod
+    app: customer-app
+    type: backend
+spec:
+  volumes:
+    - name: data
+      emptyDir: {}
+  containers:
+    - name : mysql-customer-db-container
+      image: mysql:5.6
+
+      env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        - name : MYSQL_DATABASE
+          value : customer-db
+        - name : MYSQL_USER
+          value : root
+
+      ports:
+        - containerPort: 3306
+
+      args:
+        - --lower_case_table_names=1
+        - --character_set_server=utf8
+      volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql/
+

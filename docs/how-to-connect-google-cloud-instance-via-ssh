@@ -1,0 +1,17 @@
+#How to connect google cloud instance via ssh
+
+
+#Generate SSH key using username. This user name is the google cloud user name.
+#you can verify by logging to the browser console of instance from cloud console
+ssh-keygen -t rsa -C cp_sarathe
+
+#view key or directly edit in notepad from location c:\users\<username>\.ssh
+less ssh-key
+
+#Go to google cloud console , edit instance and add above ssh-key . Note user-name at the end forms the main user which you will use to conenct via ssh
+only example - use your own generated key -
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBTZ+34VgwwtWZlwtulX4sEni+klo+b8PLT8zX9SzRSpJyKa+Q8f5Cli3vUtC+nGHN/Lx5qdboNQIG8AU/liwVSARQP7WMqkaWF19BKzzme/W03Yr5btcH8PAtXdcVjoPeyjm5vrsrtbbUwYGYmZ+NXncR8xD4EgYHT7gaHvvoQaqIefyz8VHcYsyYSlWNbvN8+oLvVCwnL+bLtaN5sHQhhRToHnycssib+CCqZ5N+IR4Cb7wJgWDXAH85Qr0WiDvEgeQ761zvwrSkaBvS7cOzIYdMDqS+3ftorKRrZjtu+49x1cqsz6TeT0hjKFwx1lsQn6GbHF5N74FaPMAwpUlx cp_sarathe
+
+#conenct to google cloud instance using instance public IP
+ssh -i ssh-key cp_sarathe@35.*.*.*
