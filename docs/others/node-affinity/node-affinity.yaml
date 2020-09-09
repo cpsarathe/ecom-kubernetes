@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+  labels:
+    name: blue
+    type: frontend
+spec:
+  template:
+    metadata:
+      name: blue
+      labels:
+        name: blue
+        app: blue-app
+        type: frontend
+
+    spec:
+      volumes:
+        - name: data
+          emptyDir: {}
+      containers:
+        - name : blue
+          image: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: color
+                    operator: In
+                    values:
+                      - blue
+
+
+  replicas: 6
+  #replica set those pods into consideration also which is not
+  #defined in this file
+  selector:
+    matchLabels:
+      type: frontend

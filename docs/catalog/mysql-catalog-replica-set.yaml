@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql-replica-set
+  labels: 
+    name: mysql-replica-set
+    type: backend
+spec:
+  #template section needed when replica set found matching label pods are not in good health
+  #it needs to create a pod and so this section is for that purpose
+  template:
+    metadata:
+      name: mysql-catalog-db-pod
+      labels:
+        name: mysql-catalog-db-pod
+        app: catalog-app
+        type: backend
+
+    spec:
+      volumes:
+        - name: data
+          emptyDir: {}
+      containers:
+        - name : mysql-catalog-db-container
+          image: mysql:5.6
+
+          env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name : MYSQL_DATABASE
+              value : catalog-db
+            - name : MYSQL_USER
+              value : root
+
+          ports:
+            - containerPort: 3306
+
+          args:
+            - --lower_case_table_names=1
+            - --character_set_server=utf8
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql/
+
+  replicas: 6
+  #replica set those pods into consideration also which is not
+  #defined in this file
+  selector:
+    matchLabels:
+      type: backend

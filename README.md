@@ -1,7 +1,8 @@
 # ecom-kubernetes
 Collection of Spring Boot Applications for Basic Ecommerce Operation. Dockerization and ultimate objective to run it in Kuberntetes
 
-# How to Access ecommerce microservice apps
+
+# How to Access ecommerce microservice apps locally
 
 ###### 1.Add a Product
 

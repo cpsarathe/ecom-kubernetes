@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mosquito
+  namespace: dev
+  labels:
+    name: mosquito
+    app: mosquito
+spec:
+  containers:
+    - name: mosquito
+      image: nginx
+  tolerations:
+    - key: "spray"
+      operator: "Equal"
+      value: "mortein"
+      effect: "NoSchedule"
+
+
+#to apply taint - kubectl taint nodes node01 spray=mortein:NoSchedule
+#to remove taint -  kubectl taint nodes controlplane -node-role.kubernetes.io/master:NoSchedule-

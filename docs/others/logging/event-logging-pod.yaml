@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: event-logger
+  namespace: dev
+  labels:
+    name: event-logger
+    app: event-logger
+spec:
+  containers:
+    - name: event-simulator
+      image: kodekloud/event-simulator
+    - name: image-processor
+      image: some-image-processor

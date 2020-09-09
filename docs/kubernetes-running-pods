@@ -4,8 +4,15 @@ sudo kubectl run mysql-customer-db-pod --image=mysql:5.6
 #check the status of pods
 sudo kubectl get pods
 
+#If you want to know the syntax of pod
+sudo kubectl explain pods --recursive | less
+
+
 #check why pod status as Error
 sudo kubectl describe pod mysql-customer-db-pod
+
+#get yaml file of pd
+sudo kubectl get pod mysql-customer-db-pod -o yaml > copy-mysql-customer-db-pod.yaml
 
 #delete pod
 sudo kubectl delete pod mysql-customer-db-pod
@@ -28,3 +35,89 @@ sudo kubectl port-forward mysql-customer-db-pod 3306:3306 --address 0.0.0.0
 #expose a service - may be we dont need
 sudo kubectl expose service customer-app-sevice  --port=9080 --target-port=9080 --name=http-customer-app
 service/http-customer-app exposed
+
+#create replica set
+sudo kubectl create -f mysql-catalog-replica-set.yaml
+
+#check replicas
+sudo kubectl get replicaset
+
+#How to update existing replica setting for replica set
+sudo kubectl replace -f mysql-catalog-replica-set.yaml
+
+or
+
+sudo kubectl scale --replicas=4 -f mysql-catalog-replica-set.yaml
+
+#delete service
+sudo kubectl delete service mysql-customer-service
+
+
+#delete replicaset
+sudo kubectl delete service mysql-catalog-replica-set
+
+#get all running types pod , replica , deployment
+sudo kubectl get all
+
+#create namespace using command line
+sudo kubectl create namespace dev
+
+
+#get pod under namespaces
+sudo kubectl get pods --namespace=dev
+
+#create configmap
+sudo kubectl create -f mysql-catalog-dbc-config-map.yaml
+
+#create secret
+sudo kubectl create -f mysql-catalog-dbc-config-secret.yaml
+
+#check if secret or environment varibale is available in node or not
+sudo kubectl exec -i -t mysql-deployment-f748f78c7-jlpk2 -- /bin/sh -c 'echo "MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD"'
+
+or
+
+sudo kubectl exec --stdin --tty mysql-customer-db-pod -- /bin/bash
+
+set
+ you will see enviornment variables
+
+#Generate base64 hashed vlaue
+echo -n '"yes"' | base64
+echo -n 'catalog-db' | base64
+echo -n 'root' | base64
+
+#check how many nodes
+kubectl get nodes
+
+#check if node is tainted
+kubectl describe node node01
+
+#create a taint on a node
+kubectl taint nodes node01 spray=mortein:NoSchedule
+
+#remove a taint from node , insepct a master node and fine taint name
+kubectl taint nodes controlplane -node-role.kubernetes.io/master:NoSchedule-
+
+#Show a lable on a node
+kubectl get nodes node01 --show-labels
+
+#Apply a lable on a node
+kubectl label nodes node01 color=blue
+
+#check the logs of a container within a pod
+sudo kubectl logs -f event-logger event-simulator
+
+#Monitoring enable metrics server for minikube
+sudo minikube addons enable metrics-server
+sudo kubectl top node
+sudo kubectl top pod
+
+
+#Labels, Selectors - find pod by selector
+sudo kubectl get pods --selector type=backend
+
+#Update image of running deployment
+kubectl set image deployment/frontend simple-webapp=kodekloud/webapp-color:v2
+
+
