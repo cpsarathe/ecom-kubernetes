@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-resource-router
+  namespace: ingress-space
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernets.io/ssl-redirect: "false"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /wear
+            backend:
+              serviceName: wear-service
+              servicePort: 80
+          - path: /watch
+            backend:
+              serviceName: video-service
+              servicePort: 80
+

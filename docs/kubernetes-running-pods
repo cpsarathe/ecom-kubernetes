@@ -121,3 +121,26 @@ sudo kubectl get pods --selector type=backend
 kubectl set image deployment/frontend simple-webapp=kodekloud/webapp-color:v2
 
 
+#check network policy
+sudo kubectl get networkpolicy
+
+sudo kubectl describe networkpolicy internal-policy
+
+#check all objects under namespaces
+sudo kubectl get all --all-namespaces
+
+#check which namespace ingress is defined
+sudo kubectl get ingress --all-namespaces
+
+sudo kubectl describe ingress --namespace app-space
+
+#edit ingress
+sudo kubectl edit ingress --namespace app-space
+
+#create service account
+sudo kubectl create serviceaccount ingress-serviceaccount --namespace ingress-space
+
+#get role and role bindings
+sudo kubectl get roles,rolebindings --namespace ingress-space
+
+
