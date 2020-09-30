@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-catalog
+  namespace: dev
+  labels:
+    app: app-catalog
+    name: app-catalog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-catalog
+  template:
+    metadata:
+      labels:
+        app: app-catalog
+    spec:
+      containers:
+        - name: app-catalog
+          image: cpsarathe/demo-ecom-repo:catalog
+          ports:
+            - containerPort: 8080
+              name: mysql-catalog
+          volumeMounts:
+            - mountPath: /logs/catalog
+              subPath: catalog
+              name: catalog-logs
+          env:
+            - name: MYSQL_HOST
+              value: service-mysql-catalog
+            - name: MYSQL_SCHEMA
+              value: catalog-db
+#            - name: MYSQL_DB_USER_PASSWORD
+#              value: abc123
+            - name: MYSQL_DB_USER
+              value: root
+
+      volumes:
+        - name: catalog-logs
+          persistentVolumeClaim:
+            claimName: pvc-logs-catalog-app

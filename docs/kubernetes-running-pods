@@ -144,3 +144,5 @@ sudo kubectl create serviceaccount ingress-serviceaccount --namespace ingress-sp
 sudo kubectl get roles,rolebindings --namespace ingress-space
 
 
+#get state of persistent volume
+sudo kubectl get persistentvolume

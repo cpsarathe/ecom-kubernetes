@@ -1,0 +1,3 @@
+#edit deployment , add env variable , add persistent volume claim
+vi deployment-wordpress.yaml
+kubectl apply -f deployment-wordpress.yaml
