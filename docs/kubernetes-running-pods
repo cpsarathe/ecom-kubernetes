@@ -138,7 +138,7 @@ sudo kubectl describe ingress --namespace app-space
 sudo kubectl edit ingress --namespace app-space
 
 #create service account
-sudo kubectl create serviceaccount ingress-serviceaccount --namespace ingress-space
+sudo kubectl create serviceaccount nginx-ingress-serviceaccount --namespace dev
 
 #get role and role bindings
 sudo kubectl get roles,rolebindings --namespace ingress-space

@@ -4,11 +4,13 @@ metadata:
   name: service-app-catalog
   namespace: dev
 spec:
-    type: NodePort
+    type: ClusterIP
+    #type: NodePort
     ports:
       - port: 12090
         targetPort: 8080
-        nodePort: 30090
+        # nodePort: 30090
+        name: http
     selector:
       #labels of metadata.labels in matching pods
       app: app-catalog
