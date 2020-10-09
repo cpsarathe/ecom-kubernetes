@@ -63,4 +63,8 @@ sudo kubectl -n dev rollout restart deployment deployment-mysql-catalog
  sudo kubectl -n dev rollout restart deployment app-catalog
 - if you access logs in pod after restart from /logs/catalog/spring.log you can see some old logs were present before restart
 
+#### setting up customer app
+sudo ./setup-customer.sh
+
+
 

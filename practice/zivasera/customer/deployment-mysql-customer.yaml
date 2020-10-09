@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-mysql-customer
+  namespace: dev
+  labels:
+    name: mysql-customer
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mysql-customer
+  template:
+    #template section needed when replica set found matching label pods are not in good health
+    #it needs to create a pod and so this section is for that purpose
+    metadata:
+      name: mysql-customer
+      labels:
+        name: mysql-customer
+        tier: backend
+    spec:
+      containers:
+        - name: mysql-customer
+          image: mysql:5.6
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              subPath: mysql
+              name: mysql-data
+          env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name: MYSQL_DATABASE
+              value: customer-db
+            - name: MYSQL_USER
+              value: root
+#            - name: MYSQL_ROOT_PASSWORD
+#              value: abc123
+
+          args:
+            - --lower_case_table_names=1
+            - --character_set_server=utf8
+
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: pvc-mysql-customer

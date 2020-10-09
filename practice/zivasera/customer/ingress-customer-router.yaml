@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-resource-router
+  name: ingress-customer-router
   namespace: dev
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /catalog
+    nginx.ingress.kubernetes.io/rewrite-target: /customer
     nginx.ingress.kubernets.io/ssl-redirect: "false"
 spec:
   rules:
     - http:
         paths:
-          - path: /catalog/*
+          - path: /customer/*
             backend:
-              serviceName: service-app-catalog
+              serviceName: service-app-customer
               servicePort: http
 

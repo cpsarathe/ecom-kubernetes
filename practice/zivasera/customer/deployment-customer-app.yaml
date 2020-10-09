@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-customer
+  namespace: dev
+  labels:
+    app: app-customer
+    name: app-customer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-customer
+  template:
+    metadata:
+      labels:
+        app: app-customer
+    spec:
+      containers:
+        - name: app-customer
+          image: cpsarathe/demo-ecom-repo:customer
+          ports:
+            - containerPort: 9080
+              name: mysql-customer
+          volumeMounts:
+            - mountPath: /logs/customer
+              subPath: customer
+              name: customer-logs
+          env:
+            - name: MYSQL_HOST
+              value: service-mysql-customer
+            - name: MYSQL_SCHEMA
+              value: customer-db
+#            - name: MYSQL_DB_USER_PASSWORD
+#              value: abc123
+            - name: MYSQL_DB_USER
+              value: root
+            - name: MYSQL_HOST_PORT
+              value: "3306"
+
+
+      volumes:
+        - name: customer-logs
+          persistentVolumeClaim:
+            claimName: pvc-logs-customer-app
